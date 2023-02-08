@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+
+<h1 class="name-welcome-header"> Blog Post</h1>
+<br/>
+
+<!-- <div class="post-container">
+      <div class="post">
+        <h3 class="post-title">{{ post.title }}</h3>
+        <p class="post-details">
+          <span class="author">By <strong>{{ post.author }}</strong></span>
+          <span class="date">{{ post.date_posted }}</span>
+        </p>
+        <p class="post-content">{{ post.content }}</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+  </div> -->
+
+<div class="container blog-post-container">
+    <div class="shadow">
+        <div class="card">
+            <div class="card-body shadow center">
+                <h5 class="card-title center"><a href="{{ url_for('posts') }}">{{ post.title }}</a></h5>
+                <p class="card-subtitle mb-2 text-muted center">{{ post.date_posted }} | <strong>{{ post.poster.name }}</strong></p>
+                <p class="card-text center">{{ post.content | safe}}</p>
+                {% if post.poster_id == current_user.id %}
+                    <a href="{{ url_for('edit_post', id=post.id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    <a href="{{ url_for('delete_post', id=post.id) }}" class="btn btn-danger btn-sm">Delete Post</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div> 
+    <a href="{{ url_for('posts') }}" class="btn btn-small btn-outline-secondary">Back to Posts</a>
+</div>
+{% endblock content %}

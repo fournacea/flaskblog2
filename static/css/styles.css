@@ -1,0 +1,32 @@
+/* h1, h2{
+    color:rgb(59, 43, 182)
+} */
+
+#pic1 {
+    width: 55%;
+}
+
+.name-welcome-header{
+    text-align: center;
+    margin-top: 20px;
+}
+
+div table {
+    background:beige ;
+}
+
+div form {
+    background:beige ;
+}
+
+body {
+    background: #cac3ee;
+}
+
+.blog-post-container{
+    max-width: 750px;
+}
+
+/* .flash{
+    background-color: hotpink;
+} */

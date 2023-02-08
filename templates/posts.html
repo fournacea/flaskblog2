@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+
+<h1 class="name-welcome-header">Blog Posts</h1>
+<br/>
+
+<!-- <div class="post-container">
+    {% for post in posts %}
+      <div class="post">
+        <h3 class="post-title">{{ post.title }}</h3>
+        <p class="post-details">
+          <span class="author">By <strong>{{ post.author }}</strong></span>
+          <span class="date">{{ post.date_posted }}</span>
+        </p>
+        <p class="post-content">{{ post.content }}</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+    {% endfor %}
+  </div> -->
+
+  <div class="container">
+    <div class="row">
+      {% for post in posts %}
+        <div class="shadow col-md-4 mb-5">
+          <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-subtitle mb-2 text-muted">{{ post.date_posted }} | <strong>{{ post.poster.name }}</strong></p>
+                <p class="card-text">{{ post.content| safe }}</p>
+                <a href="{{url_for('post', id=post.id)  }}" class="btn btn-secondary">View Post</a>
+
+                {% if post.poster_id == current_user.id %}
+                <a href="{{url_for('edit_post', id=post.id)  }}" class="btn btn-secondary">Edit</a>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}
