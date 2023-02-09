@@ -105,6 +105,7 @@ def add_post():
         flash("Blog Post Submitted! Success!")
     return render_template("add_post.html", form=form)
 
+
    #Admin Page
 @app.route('/admin')
 @login_required
@@ -115,6 +116,8 @@ def admin():
     else:
         flash("Sorry, You Must Be An Admin To Access The Admin Page...")
         return redirect(url_for('dashboard'))
+ 
+    
     #Create Dashboard Route
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
@@ -480,4 +483,3 @@ class Posts(db.Model):
 #----------------------------------------------------------
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-    
