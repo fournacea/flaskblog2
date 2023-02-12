@@ -86,7 +86,8 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Favorite Color</th>
-                    <th>Password</th>
+                    <th>About Author</th>
+                    <!-- <th>Password</th> -->
                     <th>Delete Profile</th>
                 </tr>
                 {% for user in our_users %}
@@ -107,11 +108,16 @@
                             {{ user.favorite_color }}
                         </td>
                         <td>
-                            {{ user.password_hash }}
+                            {{ user.about_author }}
                         </td>
+                        <!-- <td>
+                            {{ user.password_hash }}
+                        </td> -->
+                        {%if current_user.id == user.id %}
                         <td>
                             <a href="{{ url_for('delete', id=user.id) }}">❌</a>
                         </td>
+                        {% endif %}
                     </tr>
             
                 {% endfor %}

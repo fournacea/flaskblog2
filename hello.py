@@ -293,6 +293,7 @@ def update(id):
         name_to_update.username = request.form['username']
         name_to_update.email = request.form['email']
         name_to_update.favorite_color = request.form['favorite_color']
+        name_to_update.about_author = request.form['about_author']
         try: #Try to Commit to Database
             db.session.commit()
             flash("User Updated!")
@@ -332,6 +333,7 @@ def add_user():
             username = form.username.data,
             email=form.email.data, 
             favorite_color=form.favorite_color.data,
+            about_author=form.about_author.data,
             password_hash = hashed_pw
             )
                 #Add and Commit to Database
@@ -342,6 +344,7 @@ def add_user():
         form.username.data = ""  #Reset username
         form.email.data = "" #Reset email
         form.favorite_color.data = "" #Reset favorite_color
+        form.about_author.data = "" #Reset about_author
         form.password_hash.data = "" #Reset password_hash
         flash("Form was successfully submitted")
     our_users = Users.query.order_by(Users.date_added)
@@ -448,6 +451,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.String(120),nullable=False, unique=True)
     favorite_color = db.Column(db.String(120))
+    about_author = db.Column(db.Text(500), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
         #Password Stuff!
     password_hash = db.Column(db.String(128))

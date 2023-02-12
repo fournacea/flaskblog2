@@ -5,7 +5,8 @@ from wtforms import (
     PasswordField,
     StringField, 
     SubmitField, 
-    ValidationError, 
+    ValidationError,
+    TextAreaField, 
     )
 from wtforms.validators import InputRequired, EqualTo, Length
 from wtforms.widgets import TextArea 
@@ -51,6 +52,7 @@ class UserForm(FlaskForm):
     username = StringField("Username:", validators=[InputRequired()])
     email = StringField("Email:", validators=[InputRequired()])
     favorite_color = StringField("Favorite Color:")
+    about_author = TextAreaField("About Author:")
     password_hash = PasswordField(
         "Password", 
         validators=[InputRequired(), 
