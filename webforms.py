@@ -11,6 +11,7 @@ from wtforms import (
 from wtforms.validators import InputRequired, EqualTo, Length
 from wtforms.widgets import TextArea 
 from flask_ckeditor import CKEditorField
+from flask_wtf.file import FileField
 
     #Create Forms
 #----------------------------------------------------------------------
@@ -59,4 +60,5 @@ class UserForm(FlaskForm):
         EqualTo('password_hash2', message='Passwords must match!')]
         )
     password_hash2 = PasswordField("Confirm Password", validators=[InputRequired()])
+    profile_pic = FileField("Profile Pic")
     submit = SubmitField("Submit")

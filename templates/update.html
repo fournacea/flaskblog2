@@ -16,10 +16,10 @@
     <div>
         <h1>Update User Profile:</h1>
         <br/><br/>
-        ID to Update: {{ id }}
+        <!-- ID to Update: {{ id }}
         <br/>
         Current ID: {{ current_user.id }}
-        <br/><br/>
+        <br/><br/> -->
         <div class="shadow-lg p-3 mb-5 bg-body rounded">
             <form action="/update/{{ name_to_update.id }}" method="post">
                 {{ form.hidden_tag() }}
@@ -43,7 +43,8 @@
                 <br/>
 
                 {{ form.about_author.label(class="form-label") }}
-                {{ form.about_author(class="form-control", value=name_to_update.about_author) }}
+                <!-- {{ form.about_author(class="form-control", value=name_to_update.about_author) }} -->
+                <textarea name="about_author" class="form-control">{{ name_to_update.about_author }}</textarea>
                 <br/>
 
                 {{ form.submit(class="btn btn-secondary") }}
