@@ -21,7 +21,7 @@
         Current ID: {{ current_user.id }}
         <br/><br/> -->
         <div class="shadow-lg p-3 mb-5 bg-body rounded">
-            <form action="/update/{{ name_to_update.id }}" method="post">
+            <form action="/update/{{ name_to_update.id }}" method="post" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
 
                 {{ form.name.label(class="form-label") }}
@@ -32,10 +32,8 @@
                 {{ form.username(class="form-control", value=name_to_update.username) }}
                 <br/>
 
-
                 {{ form.email.label(class="form-label") }}
-                {{ form.email(class="form-control", value=name_to_update.email) }}
-                
+                {{ form.email(class="form-control", value=name_to_update.email) }}                
                 </br>
 
                 {{ form.favorite_color.label(class="form-label") }}
@@ -45,6 +43,11 @@
                 {{ form.about_author.label(class="form-label") }}
                 <!-- {{ form.about_author(class="form-control", value=name_to_update.about_author) }} -->
                 <textarea name="about_author" class="form-control">{{ name_to_update.about_author }}</textarea>
+                <br/>
+
+                </br>
+                {{ form.profile_pic.label(class="form-label") }}
+                {{ form.profile_pic(class="form-control", value=name_to_update.profile_pic) }}
                 <br/>
 
                 {{ form.submit(class="btn btn-secondary") }}

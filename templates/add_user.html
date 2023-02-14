@@ -47,7 +47,7 @@
         <h1>Register User:</h1>
         <br/>
         <div class="shadow-lg p-3 mb-5 bg-body rounded">
-            <form action="{{ url_for('add_user') }}" method="post">
+            <form action="{{ url_for('add_user') }}" method="post" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
 
                 {{ form.name.label(class="form-label") }}
@@ -68,6 +68,10 @@
 
                 {{ form.about_author.label(class="form-label") }}
                 {{ form.about_author(class="form-control") }}
+                <br/>
+
+                {{ form.profile_pic.label(class="form-label") }}                
+                {{ form.profile_pic(class="form-control") }}
                 <br/>
 
                 {{ form.password_hash.label(class="form-label") }}
@@ -91,6 +95,7 @@
                     <th>Email</th>
                     <th>Favorite Color</th>
                     <th>About Author</th>
+                    <th>Profile Picture</th>
                 </tr>
                 {% for user in our_users %}
                     <tr>
@@ -111,6 +116,9 @@
                         </td>
                         <td>
                             {{ user.about_author }}
+                        </td>
+                        <td>
+                            {{ user.profile_pic }}
                         </td>
                     </tr>
             
