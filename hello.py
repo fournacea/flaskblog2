@@ -306,35 +306,43 @@ def update(id):
         name_to_update.email = request.form['email']
         name_to_update.favorite_color = request.form['favorite_color']
         name_to_update.about_author = request.form['about_author']
-        name_to_update.profile_pic = request.files['profile_pic']
-
-            #Grab The Image Name
-        pic_filename = secure_filename(name_to_update.profile_pic.filename)
-            #Set UUID
-        pic_name = str(uuid.uuid1()) + "_" + pic_filename
-            #Save The Image
-        saver = request.files['profile_pic']
         
-            #Change to String to Save to Database
-        name_to_update.profile_pic = pic_name
+            #Check For Profile Pic
+        if request.files['profile_pic']:
+            name_to_update.profile_pic = request.files['profile_pic']
+            #Grab The Image Name
+            pic_filename = secure_filename(name_to_update.profile_pic.filename)
+                #Set UUID
+            pic_name = str(uuid.uuid1()) + "_" + pic_filename
+                #Save The Image
+            saver = request.files['profile_pic']    
+                #Change to String to Save to Database
+            name_to_update.profile_pic = pic_name
 
-        try: #Try to Commit to Database
+            try: #Try to Commit to Database
+                db.session.commit()
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
+                flash("User Updated!")
+                return redirect(url_for('dashboard'))
+
+            except: #Database Operation Failure
+                flash("Error! There was a problem submitting data")
+                return render_template(
+                "update.html", 
+                form=form, 
+                name_to_update=name_to_update, 
+                id=id
+                )
+        else:
             db.session.commit()
-            saver.save(os.path.join(app.config['UPLOAD_FOLDER']), pic_name)
             flash("User Updated!")
-            return redirect(url_for('add_user'))
-            #return render_template("update.html",
-            #form=form, 
-            #name_to_update=name_to_update,
-            #id=id)
-        except: #Database Operation Failure
-            flash("Error! There was a problem submitting data")
             return render_template(
-            "update.html", 
-            form=form, 
-            name_to_update=name_to_update, 
-            id=id
-            )
+                "dashboard.html", 
+                form=form, 
+                name_to_update=name_to_update, 
+                id=id
+                )
+
     else: #Submit via GET
         return render_template(
         "update.html", 

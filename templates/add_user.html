@@ -36,9 +36,6 @@
                         <td>
                             {{ user.favorite_color }}
                         </td>
-                        <td>
-                            <a href="{{ url_for('delete', id=user.id) }}">❌</a>
-                        </td>
                     </tr>
                 {% endfor %}
             </table>
